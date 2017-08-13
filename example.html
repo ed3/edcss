@@ -158,6 +158,12 @@
 	
 
 	<h2>Button</h2>
+	<button class="btn btn-lg btn-primary btn-outline">Primary</button>
+	<button class="btn btn-lg btn-success btn-outline">Success</button>
+	<button class="btn btn-lg btn-info btn-outline">Info</button>
+	<button class="btn btn-lg btn-warning btn-outline">Warning</button>
+	<button class="btn btn-lg btn-danger btn-outline">Danger</button>
+	<hr/>
 	<button class="btn btn-lg btn-default">Default</button>
 	<button class="btn btn-lg btn-primary">Primary</button>
 	<button class="btn btn-lg btn-success">Success</button>
@@ -197,12 +203,12 @@
 
 	<h2>Input Group</h2>
 	<div class="input-group">
-	<div class="input-group-addon">$</div><input type="text" class="form-control"><div class="input-group-addon">.00</div>
+	<span class="input-group-addon">$</span><input type="text" class="form-control"><span class="input-group-addon">.00</span>
 	</div>
 	<br/>
 	<div class="input-group">
 	<input type="text" class="form-control">
-	<div class="input-group-btn"><button class="btn btn-default">Go!</button></div>
+	<span class="input-group-btn"><button class="btn btn-success">Go!</button></span>
 	</div>
 	<hr/>
 
@@ -299,7 +305,7 @@
 		<div class="container">
 		<div class="modal-content">
 			<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+			<span class="close" data-dismiss="modal">&times;</span>
 			<h4 class="modal-title">Title</h4>
 			</div>
 			<div class="modal-body"><p>Some text in the modal.</p>
@@ -319,10 +325,15 @@
 	<hr/>
 	
 	
-	<h2>Image</h2>
+	<h2>Image & Gallery</h2>
 	<div class="row">
-	<div class="col4"><div class="thumbnail"><img class="img-rounded" src="1.jpg"/></div></div>
-	<div class="col4"><img class="img-circle" src="1.jpg"/></div>
+	<div class="col4"><a href="#" class="thumbnail" data-id="" data-toggle="modal" data-target="gal"><img class="img-rounded" src="01.jpg"/></a></div>
+	<div class="col4"><a href="#" class="thumbnail" data-id="" data-toggle="modal" data-target="gal"><img class="img-rounded" src="02.jpg"/></a></div>
+	<div class="col4"><a href="#" class="thumbnail" data-id="" data-toggle="modal" data-target="gal"><img class="img-rounded" src="03.jpg"/></a></div>
+	</div>
+	<div class="modal" id="gal">
+		<div class="gallery-bar"><span id="previous-img">&laquo;</span><span id="next-img">&raquo;</span><span class="close" data-dismiss="modal">&times;</span></div>
+		<div class="gallery-img"></div>
 	</div>
 	<hr/>
 	
@@ -344,7 +355,7 @@
 	<div>&copy; 2017</div>
 </div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="jquery.js"><\/script>')</script>
+	<script>window.jQuery || document.write('<script src="http://emon/jq/jquery12.js"><\/script>')</script>
 	<script src="edcss.js"></script>
 </body>
 </html>
