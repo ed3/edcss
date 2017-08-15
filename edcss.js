@@ -73,10 +73,20 @@ function disableButtons(count_max, count_current){
 }
 function loadGallery(setIDs, setClick){
 	var current_image, selector, count = 0;
-	$(document).bind("keydown",function(e){
+	$('#next-img, #previous-img').click(function(){
+		if($(this).attr('id') == 'previous-img'){
+		current_image--;
+		} else {
+		current_image++;
+		}
+		selector = $('[data-id="' + current_image + '"]');
+		updateGallery(selector);
+	});
+	function key(e){
 		if(e.keyCode==27 || e.which==27){
 		$(".modal").hide();
 		$("html,body").css("overflow","auto");
+		$(document).off("keyup",key);
 		}
 		if(current_image >= count && (e.keyCode==39 || e.which==39)) return false;
 		if(e.keyCode==39 || e.which==39){
@@ -90,16 +100,7 @@ function loadGallery(setIDs, setClick){
 		selector = $('[data-id="' + current_image + '"]');
 		updateGallery(selector);
 		}
-	});
-	$('#next-img, #previous-img').click(function(){
-		if($(this).attr('id') == 'previous-img'){
-		current_image--;
-		} else {
-		current_image++;
-		}
-		selector = $('[data-id="' + current_image + '"]');
-		updateGallery(selector);
-	});
+	}
 	function size(sel){
 		var img = new Image();
 		img.src = sel.children().prop("src");
@@ -115,6 +116,7 @@ function loadGallery(setIDs, setClick){
 		disableButtons(count, $sel.data('id'));
 		size($sel);
 		$(window).resize(function(){size($sel)});
+		$(document).on("keyup",key);
 	}
 	if(setIDs == true){
 		$('[data-id]').each(function(){
