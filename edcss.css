@@ -533,6 +533,7 @@ border:1px solid #ddd}
 .dropdown-menu {position:absolute;background-color:#fff;padding:3px 0;border:1px solid #ccc;border-radius:0 0 4px 4px;-webkit-box-shadow:0 5px 10px rgba(0, 0, 0, .175);box-shadow:0 5px 10px rgba(0, 0, 0, .175)}
 .navbar-right .dropdown-menu .dropdown-menu {right: auto;top:-3px;left: -160px}
 .navbar-inverse .dropdown-menu .dropdown-header:hover,.navbar-primary .dropdown-menu .dropdown-header:hover {background-color:#fff}
+.dropdown:hover>.dropdown-menu {display:block}
 }
 .dropdown-menu li {float: none}
 .dropdown-menu > li > a {display: block;padding: 3px 20px;font-weight: normal;line-height: 1.42857143;clear: both;white-space: nowrap}
