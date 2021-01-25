@@ -25,7 +25,7 @@ var nextEl=this.nextElementSibling;
 //mobile
 if(nextEl.classList.contains('dropdown-menu')) nextEl.classList.add('dropdown-open');
 else nextEl.classList.remove('dropdown-open');
-//desktop => @media (min-width:768px) {.dropdown:hover>.dropdown-menu {display:block}}
+//desktop: @media (min-width:768px){.dropdown:hover>.dropdown-menu {display:block}}
 });
 });
 })();
@@ -59,7 +59,7 @@ modal.addEventListener('click',function(e){
 var modal_target=this.getAttribute('data-target');
 var tagetEl=document.getElementById(modal_target);
 tagetEl.style.display="none";
-if(this.tagName == 'A') e.preventDefault();
+if(this.tagName=='A') e.preventDefault();
 document.body.style.overflow="hidden";
 tagetEl.style.display="block";
 var dismiss=tagetEl.querySelectorAll('[data-dismiss="modal"]');
@@ -106,11 +106,11 @@ indicators[active].classList.add('active');
 (function(){//gallery
 var prevImg=document.querySelector('#previous-img'), nextImg=document.querySelector('#next-img');
 var winSize=function(){
-var w=window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-var h=window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+var w=window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth;
+var h=window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight;
 return w+'x'+h;
 }
-function disableButtons(count_max, count_current){
+function disableButtons(count_max,count_current){
 prevImg.style.display="block";
 nextImg.style.display="block";
 if(count_max == count_current){
@@ -119,7 +119,7 @@ nextImg.style.display="none";
 prevImg.style.display="none";
 }
 }
-var curr_img, selector, count=0, setIDs=true, setClick='a.thumbnail';
+var curr_img,selector,count=0,setIDs=true,setClick='a.thumbnail',target;
 prevImg.addEventListener('click',function(){
 curr_img--;
 selector=document.querySelector('[data-id="'+curr_img+'"]');
@@ -132,18 +132,18 @@ updateGallery(selector);
 });
 function key(e){
 if(e.keyCode==27 || e.which==27){
-document.querySelector('.modal').style.display="none";
+document.querySelector('#'+target).style.display="none";
 document.body.style.overflow="auto";
 document.removeEventListener('keyup', key);
 }
-if(curr_img >= count && (e.keyCode==39 || e.which==39)) return false;
-if(e.keyCode==39 || e.which==39){
+if(curr_img >= count && (e.keyCode==39||e.which==39)) return false;
+if(e.keyCode==39||e.which==39){
 curr_img++;
 selector=document.querySelector('[data-id="'+curr_img+'"]');
 updateGallery(selector);
 }
-if(curr_img <= 1 && (e.keyCode==37 || e.which==37)) return false;
-else if(e.keyCode==37 || e.which==37){
+if(curr_img <= 1 && (e.keyCode==37||e.which==37)) return false;
+else if(e.keyCode==37||e.which==37){
 curr_img--;
 selector=document.querySelector('[data-id="'+curr_img+'"]');
 updateGallery(selector);
@@ -151,9 +151,9 @@ updateGallery(selector);
 }
 function size(sel){
 var img=new Image();
-img.src=sel.childNodes[0].getAttribute("src");
-var imgW=img.width, imgH=img.height, siz=winSize().split('x'), w=siz[0],h=siz[1], left=(imgW<w ? (w/2-imgW/2):0);
-document.querySelector('.gallery-img').setAttribute('style','width:'+(imgW<w?imgW:w)+'px;left:'+left+'px;height:'+h+'px;background-image:url('+img.src+');background-repeat:no-repeat;background-position:center;background-size:contain');
+img.src=sel.children[0].getAttribute("src");
+var imgW=img.width,imgH=img.height,siz=winSize().split('x'),w=siz[0],h=siz[1],left=(imgW<w ? (w/2-imgW/2):0);
+document.querySelector('#'+target+' .gallery-img').setAttribute('style','width:'+(imgW<w?imgW:w)+'px;left:'+left+'px;height:'+h+'px;background-image:url("'+img.src+'");background-repeat:no-repeat;background-position:center;background-size:contain');
 }
 function updateGallery(selector){
 var sel=selector;
@@ -174,6 +174,7 @@ var thumbs=document.querySelectorAll(setClick);
 [].forEach.call(thumbs,function(thumb){
 thumb.addEventListener('click',function(){
 var id=this.getAttribute('data-id');
+target=this.getAttribute('data-target');
 updateGallery(document.querySelector('[data-id="'+id+'"]'));
 });
 });
