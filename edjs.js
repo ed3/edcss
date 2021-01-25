@@ -163,15 +163,14 @@ size(sel);
 window.addEventListener("resize",function(){size(sel)});
 document.addEventListener('keyup',key);
 }
-if(setIDs==true){
-var aID=document.querySelectorAll('[data-id]');
-[].forEach.call(aID,function(a){
-count++;
-a.setAttribute('data-id',count);
-});
-}
 var thumbs=document.querySelectorAll(setClick);
 [].forEach.call(thumbs,function(thumb){
+count++;
+if(setIDs==true){
+var attr=document.createAttribute('data-id');
+attr.value=count;
+thumb.setAttributeNode(attr);
+}else thumb.setAttribute('data-id',count);
 thumb.addEventListener('click',function(){
 var id=this.getAttribute('data-id');
 target=this.getAttribute('data-target');
