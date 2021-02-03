@@ -247,21 +247,21 @@ label{display:inline-block;max-width:100%;margin-bottom:5px;font-weight:bold}
 /*Panel*/
 .panel{margin-bottom:20px;background-color:#fff;border:1px solid transparent;border-radius:4px;-webkit-box-shadow:0 1px 1px rgba(0, 0, 0, .05);box-shadow:0 1px 1px rgba(0, 0, 0, .05)}
 .panel-body{padding:15px}
-.panel-heading{color:#fff;padding:10px 15px;border-bottom:1px solid transparent;border-top-left-radius:3px;border-top-right-radius:3px}
+.panel-header{color:#fff;padding:10px 15px;border-bottom:1px solid transparent;border-top-left-radius:3px;border-top-right-radius:3px}
 .panel-title{margin-top:0;margin-bottom:0;font-size:16px;color:inherit}
 .panel-footer{padding:10px 15px;background-color:#f5f5f5;border-top:1px solid #ddd;border-bottom-right-radius:3px;border-bottom-left-radius:3px}
 .panel-default{border-color:#ddd}
-.panel-default > .panel-heading{color:#333;background-color:#f5f5f5;border-color:#ddd}
+.panel-default > .panel-header{color:#333;background-color:#f5f5f5;border-color:#ddd}
 .panel-primary{border-color:#337ab7}
-.panel-primary > .panel-heading{background-color:#337ab7;border-color:#337ab7}
+.panel-primary > .panel-header{background-color:#337ab7;border-color:#337ab7}
 .panel-success{border-color:#4cae4c}
-.panel-success > .panel-heading{background-color:#5cb85c;border-color:#4cae4c}
+.panel-success > .panel-header{background-color:#5cb85c;border-color:#4cae4c}
 .panel-info{border-color:#46b8da}
-.panel-info > .panel-heading{background-color:#5bc0de;border-color:#46b8da}
+.panel-info > .panel-header{background-color:#5bc0de;border-color:#46b8da}
 .panel-warning{border-color:#eea236}
-.panel-warning > .panel-heading{background-color:#f0ad4e;border-color:#eea236}
+.panel-warning > .panel-header{background-color:#f0ad4e;border-color:#eea236}
 .panel-danger{border-color:#d43f3a}
-.panel-danger > .panel-heading{background-color:#d9534f;border-color:#d43f3a}
+.panel-danger > .panel-header{background-color:#d9534f;border-color:#d43f3a}
 
 .box{position:relative;margin-bottom:20px;padding:10px 15px;width:100%;background:#fff;border-radius:3px;border-top:3px solid #ddd;-webkit-box-shadow:0 1px 1px rgba(0, 0, 0, 0.1);box-shadow:0 1px 1px rgba(0, 0, 0, 0.1)}
 .box-default{border-top-color:#ddd}
@@ -348,17 +348,17 @@ border:1px solid #ddd}
 .carousel-indicators .active{width:12px;height:12px;margin:0;background-color:#fff}
 
 /*Table*/
-.table{width:100%;max-width:100%;border-top:3px solid #337ab7}
+.table{width:100%;max-width:100%;border-top:1px solid #337ab7}
 .table > thead > tr > th,.table > tbody > tr > th,.table > tfoot > tr > th,.table > thead > tr > td,.table > tbody > tr > td,.table > tfoot > tr > td{padding:8px;line-height:1.42857143;vertical-align:top;border-top:1px solid #ddd}
 .table > thead > tr > th{vertical-align:bottom;border-bottom:2px solid #ddd}
 .table > caption + thead > tr:first-child > th,.table > colgroup + thead > tr:first-child > th,.table > thead:first-child > tr:first-child > th,.table > caption + thead > tr:first-child > td,.table > colgroup + thead > tr:first-child > td,.table > thead:first-child > tr:first-child > td{border-top:0}
 .table > tbody + tbody{border-top:2px solid #ddd}
 .table .table{background-color:#fff}
-.table-condensed > thead > tr > th,.table-condensed > tbody > tr > th,.table-condensed > tfoot > tr > th,.table-condensed > thead > tr > td,.table-condensed > tbody > tr > td,.table-condensed > tfoot > tr > td{padding:5px}
+.table-sm > thead > tr > th,.table-sm > tbody > tr > th,.table-sm > tfoot > tr > th,.table-sm > thead > tr > td,.table-sm > tbody > tr > td,.table-sm > tfoot > tr > td{padding:5px}
 .table-bordered,.table-bordered > thead > tr > th,.table-bordered > tbody > tr > th,.table-bordered > tfoot > tr > th,.table-bordered > thead > tr > td,.table-bordered > tbody > tr > td,.table-bordered > tfoot > tr > td{border:1px solid #ddd}
 .table-bordered > thead > tr > th,.table-bordered > thead > tr > td{border-bottom-width:2px}
 .table-striped > tbody > tr:nth-of-type(odd){background-color:#f9f9f9}
-.table-hover > tbody > tr:hover{background-color:#5bc0de}
+.table-hover > tbody > tr:hover{background-color:#eee}
 
 /*Tab, NavBar*/
 .nav *,.nav *:hover,.nav *:focus,.navbar-brand:hover,.navbar-brand:focus{text-decoration:none}
