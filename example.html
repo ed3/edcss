@@ -96,10 +96,9 @@
 
 	<h2>Grid</h2>
 	<div class="row">
-	<div class="col3 col4-lg" style="border:1px solid #777">col3 col4-lg</div>
-	<div class="col9 col8-lg" style="border:1px solid #777">col9 col8-lg</div>
+	<div class="col3 col4-lg" style="border:1px solid #345">col3 col4-lg</div>
+	<div class="col9 col8-lg">col9 col8-lg</div>
 	</div>
-	<hr/>
 
 	<h2>Tab</h2>
 	<ul class="nav nav-tabs">
@@ -231,13 +230,13 @@
 	<form><fieldset class="scheduler-border">
 	<legend class="scheduler-border">MyForm</legend>
 	<div class="form-group">
-	<label for="email">Email:</label><input type="text" class="form-control" name="email">
+	<label for="email">Email</label><input type="text" class="form-control" name="email">
 	</div>
 	<div class="form-group">
-	<label for="password">Password:</label><input type="password" class="form-control input-sm" name="password" disabled>
+	<label for="password">Password</label><input type="password" class="form-control input-sm" name="password" disabled>
 	</div>
 	<div class="form-group">
-	<label for="lang">Lang:</label><select class="form-control input-sm" name="lang">
+	<label for="lang">Lang</label><select class="form-control input-sm" name="lang">
 	<option value="en">En</option><option value="de">De</option>
 	<optgroup label="Nordic Lang">
 	<option value="se">Se</option><option value="fi">Fi</option>
@@ -245,19 +244,19 @@
 	</select>
 	</div>
 	<div class="form-group">
-	<label for="description">Description:</label><textarea class="form-control"></textarea>
+	<label for="description">Description</label><textarea class="form-control"></textarea>
 	</div>
 	<div class="form-group">
-	<input type="radio" name="gender" value="male"> Male
+	<input type="radio" name="gender" value="male" disabled /> Male
 	<input type="radio" name="gender" value="female"> Female
 	<input type="radio" name="gender" value="other"> Other
 	</div>
 	<div class="form-group">
-	<input type="checkbox" name="animal" value="Cat" /> Cats
-	<input type="checkbox" name="animal" value="Dog" /> Dogs
-	<input type="checkbox" name="animal" value="Bird" /> Birds
+	<input id="check1" type="checkbox" name="animal" value="Cat" /> Cats
+	<input id="check2" type="checkbox" name="animal" value="Dog" /> Dogs
+	<input id="check3" type="checkbox" name="animal" value="Bird" disabled /> Birds
 	</div>
-	<input type="submit" value="Submit" class="btn btn-block btn-sm btn-primary">
+	<input type="submit" value="Submit" class="btn btn-block btn-sm btn-primary" />
 	</fieldset></form>
 	<hr/>
 
