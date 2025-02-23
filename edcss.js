@@ -1,4 +1,9 @@
-(function(){//alert close
+!function(g,f){
+"object"==typeof exports&&"undefined"!=typeof module?module.exports=f():"function"==typeof define&&define.amd?define(f):g.edcss=f()
+}(this,function(){
+'use strict';
+
+//alert
 let alerts=document.querySelectorAll('.alert .close');
 [].forEach.call(alerts,function(alert){
 alert.addEventListener('click',function(e){
@@ -6,10 +11,8 @@ e.preventDefault();
 e.target.parentNode.parentNode.removeChild(e.target.parentNode);
 });
 });
-})();
 
-(function(){//nav
-//hamburger
+//nav
 let navs=document.querySelector('.navbar-toggle');
 if(navs!=null){
 navs.addEventListener('click',function(e){
@@ -31,9 +34,8 @@ nextEl.classList.toggle('dropdown-open');
 //desktop: @media(min-width:768px){.dropdown:hover>.dropdown-menu{display:block}}
 });
 });
-})();
 
-(function(){//tab
+//tab
 let tabs=document.querySelectorAll('.nav-tabs li');
 [].forEach.call(tabs,function(tab){
 tab.addEventListener('click',function(e){
@@ -47,15 +49,14 @@ self.classList.add('active');
 let id=e.target.getAttribute('href').replace(/.*(?=#[^\s]*$)/,'');
 let tabnext=self.parentNode.nextElementSibling;
 [].forEach.call(tabnext.children,function(el){
-el.style.display="none";
+el.classList.remove('active');
 });
-tabnext.querySelector(id).style.display="block";
+tabnext.querySelector(id).classList.add('active');
 }
 });
 });
-})();
 
-(function(){//modal
+//modal
 let modals=document.querySelectorAll('[data-toggle="modal"]');
 [].forEach.call(modals,function(modal){
 modal.addEventListener('click',function(e){
@@ -74,9 +75,8 @@ tagetEl.style.display="none";
 });
 });
 });
-})();
 
-(function(){//carousel
+//carousel
 let time=7000;
 let carouselTimer=setInterval(function(){carousel();},time);
 let indicators=document.querySelectorAll('.indicator');
@@ -106,9 +106,8 @@ indicator.classList.remove('active');
 indicators[active].classList.add('active');
 }
 }
-})();
 
-(function(){//gallery
+//gallery
 let prevImg=document.querySelector('#previous-img'), nextImg=document.querySelector('#next-img');
 let winSize=function(){
 let w=window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth;
@@ -122,6 +121,10 @@ if(count_max == count_current){
 nextImg.style.display="none";
 }else if(count_current == 1){
 prevImg.style.display="none";
+}
+if(count_max==1){
+prevImg.style.display="none";
+nextImg.style.display="none";
 }
 }
 let curr_img,selector,count=0,setIDs=true,setClick='a.thumbnail',target;
@@ -164,8 +167,7 @@ img.src=sel.children[0].getAttribute("src");
 let imgW=img.width,imgH=img.height,siz=winSize().split('x'),w=siz[0],h=siz[1],left=(imgW<w ? (w/2-imgW/2):0);
 document.querySelector('#'+target+' .gallery-img').setAttribute('style','width:'+(imgW<w?imgW:w)+'px;left:'+left+'px;height:'+h+'px;background:center / contain no-repeat url("'+img.src+'")');
 }
-function updateGallery(selector){
-let sel=selector;
+function updateGallery(sel){
 curr_img=sel.getAttribute('data-id');
 disableButtons(count,curr_img);
 size(sel);
@@ -186,4 +188,41 @@ target=this.getAttribute('data-target');
 updateGallery(document.querySelector('[data-id="'+id+'"]'));
 });
 });
-})();
+
+var isObj=function(str){
+return str instanceof Object ? true : false;
+}
+
+//ajax
+return {
+ajax:function(opt){
+opt.type=(opt.type || 'GET').toUpperCase();
+opt.async=opt.async != null ? opt.async : true;
+let xhr=window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+xhr.onreadystatechange=function(){
+if(xhr.readyState==4){
+let status = xhr.status;
+if(status >= 200 && status < 300){
+opt.success && opt.success(xhr.responseText,xhr.responseXML);
+}else{
+opt.fail && opt.fail(status);
+}
+}
+}
+if(isObj(opt.data)){
+let arr=[];
+for(let name in opt.data) arr.push(encodeURIComponent(name)+"="+encodeURIComponent(opt.data[name]));
+opt.data=arr.join("&");
+}
+if(opt.type=="GET"){
+xhr.open("GET",opt.url+"?"+opt.data,opt.async);
+xhr.send(null);
+}else if (opt.type == "POST"){
+xhr.open("POST",opt.url,opt.async);
+xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+xhr.send(opt.data);
+}
+}
+}
+
+});
