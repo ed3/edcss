@@ -1,25 +1,19 @@
 <!DOCTYPE html>
-<html data-ed-theme="" lang="en">
+<html data-ed-theme="">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="EdCSS - mini css framework">
-<meta name="author" content="Ed">
 <title>EdCSS</title>
 <link href="edcss.css" rel="stylesheet">
 </head>
 <body>
-<div class="navbar navbar-primary navbar-static-top">
+<nav class="navbar">
 <div class="container">
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle">
-		<span class="icon-bar"></span>
-		<span class="icon-bar"></span>
-		<span class="icon-bar"></span>
-		</button>
-		<a class="navbar-brand" href="#">EdCSS</a>
-	</div>
-	<ul class="nav navbar-nav">
+	<a class="navbar-brand" href="#">EdCSS</a>
+	<button type="button" class="navbar-toggler" aria-expanded="false">
+	<span class="navbar-toggler-icon"></span>
+	</button>
+	<ul class="navbar-nav">
 		<li class="active"><a href="#">Home</a></li>
 		<li><a href="#">About</a></li>
 		<li class="dropdown"><a href="#" class="dropdown-toggle">Contact <span class="caret"></span></a>
@@ -58,7 +52,7 @@
 			</ul>
 		</li>
 	</ul>
-	<ul class="nav navbar-nav navbar-right">
+	<ul class="navbar-nav navbar-right">
 		<li class="dropdown"><a href="#" class="dropdown-toggle">Right top <span class="caret"></span></a>
 			<ul class="dropdown-menu">
 			<li><a href="#">C1</a></li>
@@ -72,9 +66,9 @@
 		</li>
 	</ul>
 </div>
-</div>
+</nav>
 <div class="container">
-	<div class="ban">
+	<div class="bg-light p-5 mt-1 rounded">
 	<h1>EdCSS</h1>
 	</div>
 
@@ -95,12 +89,13 @@
 
 	<h2>Grid</h2>
 	<div class="row">
-	<div class="col3 col4-lg" style="border:1px solid #345">col3 col4-lg</div>
-	<div class="col9 col8-lg">col9 col8-lg</div>
+	<div class="col-2 col-lg-4" style="border:1px solid #345">col-2 col-lg-4</div>
+	<div class="col-10 col-lg-8">col-10 col-lg-8</div>
 	</div>
+	<hr/>
 
 	<h2>Tab</h2>
-	<ul class="nav nav-tabs">
+	<ul class="nav-tabs">
 	<li class="active"><a href="#home">Home</a></li>
 	<li class="disabled"><a href="#contact">Contact</a></li>
 	</ul>
@@ -109,7 +104,7 @@
 	<div id="contact" class="tab-pane">Contact...</div>
 	</div>
 
-	<ul class="nav nav-tabs">
+	<ul class="nav-tabs mt-1">
 	<li class="active"><a href="#home">Home</a></li>
 	<li><a href="#contact">Contact</a></li>
 	</ul>
@@ -146,10 +141,12 @@
 
 	<h2>Button</h2>
 	<button class="btn btn-lg btn-primary btn-outline">Primary</button>
+	<button class="btn btn-lg btn-secondary btn-outline">Secondary</button>
 	<button class="btn btn-lg btn-success btn-outline">Success</button>
 	<button class="btn btn-lg btn-info btn-outline">Info</button>
 	<button class="btn btn-lg btn-warning btn-outline">Warning</button>
-	<button class="btn btn-lg btn-danger btn-outline">Danger</button>
+	<button class="btn btn-lg btn-light btn-outline">Light</button>
+	<button class="btn btn-lg btn-dark btn-outline">Dark</button>
 	<hr/>
 	<button class="btn btn-lg btn-primary">Primary <b class="badge badge-primary">1</b></button>
 	<button class="btn btn-lg btn-success">Success <b class="badge badge-success">2</b></button>
@@ -158,22 +155,19 @@
 	<button class="btn btn-lg btn-danger">Danger <b class="badge badge-danger">5</b></button>
 	<hr/>
 	<button class="btn btn-primary">Primary</button>
+	<button class="btn btn-secondary">Secondary</button>
 	<button class="btn btn-success">Success</button>
 	<button class="btn btn-info">Info</button>
 	<button class="btn btn-warning">Warning</button>
 	<button class="btn btn-danger">Danger</button>
+	<button class="btn btn-light">Light <div class="spinner-border spinner-border-sm"></div></button>
+	<button class="btn btn-dark">Dark</button>
 	<hr/>
 	<button class="btn btn-sm btn-primary">Primary</button>
 	<button class="btn btn-sm btn-success">Success</button>
 	<button class="btn btn-sm btn-info">Info</button>
 	<button class="btn btn-sm btn-warning">Warning</button>
 	<button class="btn btn-sm btn-danger">Danger</button>
-	<hr/>
-	<button class="btn btn-xs btn-primary">Primary</button>
-	<button class="btn btn-xs btn-success">Success</button>
-	<button class="btn btn-xs btn-info">Info</button>
-	<button class="btn btn-xs btn-warning">Warning</button>
-	<button class="btn btn-xs btn-danger">Danger</button>
 	<hr/>
 
 	<h2>Button Group</h2>
@@ -224,76 +218,105 @@
 	<h2>Form</h2>
 	<form><fieldset class="scheduler-border">
 	<legend class="scheduler-border">MyForm</legend>
-	<div class="form-group form-float">
-	<input type="text" class="form-control" name="email"><label for="email">Email</label>
+	<div class="form-float mb-1">
+	<input type="text" class="form-control" name="email" required ><label for="email">Email</label>
 	</div>
-	<div class="form-group">
-	<label for="password">Password</label><input type="password" class="form-control input-sm" name="password" disabled>
+	<div class="mb-1">
+	<label for="password">Password</label><input type="password" class="form-control form-control-sm" name="password" disabled>
 	</div>
-	<div class="form-group">
-	<label for="lang">Lang</label><select class="form-control input-sm" name="lang">
+	<div class="mb-1">
+	<label for="lang">Lang</label><select class="form-control form-control-sm" name="lang">
 	<option value="en">En</option><option value="de">De</option>
 	<optgroup label="Nordic Lang">
 	<option value="se">Se</option><option value="fi">Fi</option>
 	</optgroup>
 	</select>
 	</div>
-	<div class="form-group">
+	<div class="mb-1">
 	<label for="description">Description</label><textarea class="form-control"></textarea>
 	</div>
-	<div class="form-group">
+	<div class="mb-1">
 	<input type="radio" name="gender" value="male"/> Male
 	<input type="radio" name="gender" value="female"> Female
 	<input type="radio" name="gender" value="other" disabled > Other
 	</div>
-	<div class="form-group">
+	<div class="mb-1">
 	<input id="check1" type="checkbox" name="animal" value="Cat" disabled /> Cats
 	<input id="check2" type="checkbox" name="animal" value="Dog" /> Dogs
 	<input id="check3" type="checkbox" name="animal" value="Bird"/> Birds
 	</div>
-	<input type="submit" value="Submit" class="btn btn-block btn-sm btn-primary" />
+	<input type="submit" value="Submit" class="btn btn-sm btn-primary w-100" />
 	</fieldset></form>
 	<hr/>
 
-	<h2>Panel</h2>
+	<h2>Card</h2>
 	<div class="row">
-	<div class="col4">
-		<div class="panel panel-primary">
-			<div class="panel-header"><h3 class="panel-title">Panel primary</h3></div>
-			<div class="panel-body">content</div>
+	<div class="col-12 col-sm-4 col-lg-3">
+		<div class="card bg-primary">
+			<div class="card-header"><h3>primary</h3></div>
+			<div class="card-body">content</div>
+			<div class="card-footer">footer</div>
 		</div>
 	</div>
-	<div class="col4">
-		<div class="panel panel-success">
-			<div class="panel-header"><h3 class="panel-title">Panel success</h3></div>
-			<div class="panel-body">content</div>
-		</div>
-		<div class="panel panel-info">
-			<div class="panel-header"><h3 class="panel-title">Panel info</h3></div>
-			<div class="panel-body">content</div>
+	<div class="col-12 col-sm-4 col-lg-3">
+		<div class="card bg-success">
+			<div class="card-header"><h3>success</h3></div>
+			<div class="card-body">content</div>
 		</div>
 	</div>
-	<div class="col4">
-		<div class="panel panel-warning">
-			<div class="panel-header"><h3 class="panel-title">Panel warning</h3></div>
-			<div class="panel-body">content</div>
+	<div class="col-12 col-sm-4 col-lg-3">
+		<div class="card bg-info">
+			<div class="card-header"><h3>info</h3></div>
+			<div class="card-body">content</div>
 		</div>
-		<div class="panel panel-danger">
-			<div class="panel-header"><h3 class="panel-title">Panel danger</h3></div>
-			<div class="panel-body">content</div>
+	</div>
+	<div class="col-12 col-sm-4 col-lg-3">
+		<div class="card bg-warning">
+			<div class="card-header"><h3>warning</h3></div>
+			<div class="card-body">content</div>
 		</div>
+	</div>
+	<div class="col-12 col-sm-4 col-lg-3">
+		<div class="card bg-danger">
+			<div class="card-header"><h3>danger</h3></div>
+			<div class="card-body">content</div>
+		</div>
+	</div>
+	<div class="col-12 col-sm-4 col-lg-3">
+		<div class="card">
+			<div class="card-header"><h3>default</h3></div>
+			<div class="card-body">content</div>
+		</div>
+	</div>
+	<div class="col-12 col-sm-4 col-lg-3">
+		<div class="card bg-light">
+			<div class="card-header"><h3>light</h3></div>
+			<div class="card-body">content</div>
+		</div>
+	</div>
+	<div class="col-12 col-sm-4 col-lg-3">
+		<div class="card bg-dark">
+			<div class="card-header"><h3>dark</h3></div>
+			<div class="card-body">content</div>
+		</div>
+	</div>
 	</div>
 
-	<div class="col4">
-		<div class="box box-left-primary">Box primary <b class="badge badge-primary">2</b></div>
+	<div class="row">
+	<div class="col-12 col-sm-6 col-lg-4">
+		<div class="box box-primary">Box primary <b class="badge badge-primary">1</b></div>
 	</div>
-	<div class="col4">
-		<div class="box box-left-success">Box success <b class="badge badge-success">3</b></div>
-		<div class="box box-info">Box info <b class="badge badge-info">4</b></div>
+	<div class="col-12 col-sm-6 col-lg-4">
+		<div class="box box-success">Box success <b class="badge badge-success">2</b></div>
 	</div>
-	<div class="col4">
-		<div class="box box-left-warning">Box warning <b class="badge badge-warning">5</b></div>
-		<div class="box box-danger">Box danger <b class="badge badge-danger">6</b></div>
+	<div class="col-12 col-sm-6 col-lg-4">
+		<div class="box box-info">Box info <b class="badge badge-info">3</b></div>
+	</div>
+	<div class="col-12 col-sm-6 col-lg-4">
+		<div class="box box-warning">Box warning <b class="badge badge-warning">4</b></div>
+	</div>
+	<div class="col-12 col-sm-6 col-lg-4">
+		<div class="box box-danger">Box danger <b class="badge badge-danger">5</b></div>
 	</div>
 	</div>
 	<hr/>
@@ -305,19 +328,16 @@
 	<div class="alert alert-danger"><a href="#" class="close">&times;</a>Alert danger!</div>
 
 	<h2>Modal</h2>
-	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="my1">Modal1</button>
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="my1">Modal</button>
 	<div class="modal" id="my1">
-		<div class="container">
-		<div class="modal-content">
-			<div class="modal-header">
-			<span class="close" data-dismiss="modal">&times;</span>
-			<h4 class="modal-title">Title</h4>
-			</div>
-			<div class="modal-body"><p>Some text in the modal.</p>
-			</div>
-			<div class="modal-footer"><button type="button" class="btn btn-xs btn-primary" data-dismiss="modal">Close</button></div>
-		</div>
-		</div>
+	<div class="container">
+	<div class="modal-content">
+		<span class="close" data-dismiss="modal">&times;</span>
+		<h4>Title</h4>
+		<p>Some text in the modal.</p>
+		<button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Close</button>
+	</div>
+	</div>
 	</div>
 	<hr/>
 
@@ -328,20 +348,20 @@
 	<blockquote>Blockquote</blockquote>
 	<hr/>
 
-	<h2>Image & Gallery</h2>
+	<h2>Image Gallery</h2>
 	<div class="row">
-	<div class="col4"><a href="#" class="thumbnail" data-toggle="modal" data-target="gal"><img class="img-rounded" src="01.jpg"/></a></div>
-	<div class="col4"><a href="#" class="thumbnail" data-toggle="modal" data-target="gal"><img class="img-rounded" src="02.jpg"/></a></div>
-	<div class="col4"><a href="#" class="thumbnail" data-toggle="modal" data-target="gal"><img class="img-rounded" src="03.jpg"/></a></div>
+	<div class="col-4"><a href="#" class="img-thumbnail" data-toggle="modal" data-target="gal"><img class="rounded" src="01.jpg"/></a></div>
+	<div class="col-4"><a href="#" class="img-thumbnail" data-toggle="modal" data-target="gal"><img class="rounded" src="02.jpg"/></a></div>
+	<div class="col-4"><a href="#" class="img-thumbnail" data-toggle="modal" data-target="gal"><img class="rounded" src="03.jpg"/></a></div>
 	</div>
 	<div id="gal" class="modal">
-		<div class="gallery-bar"><span id="previous-img">&laquo;</span><span id="next-img">&raquo;</span><span class="close" data-dismiss="modal">&times;</span></div>
-		<div class="gallery-img"></div>
+	<div class="gallery-bar"><span id="previous-img">&laquo;</span><span id="next-img">&raquo;</span><span class="close" data-dismiss="modal">&times;</span></div>
+	<div class="gallery-img"></div>
 	</div>
 	<hr/>
 
 	<h2>Carousel</h2>
-	<div class="carousel" style="background:var(--ed-blue);height:50px">
+	<div class="carousel" style="background:var(--ed-primary);height:50px">
 		<ol class="carousel-indicators">
 			<li class="indicator active"></li>
 			<li class="indicator"></li>

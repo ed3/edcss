@@ -1,6 +1,4 @@
-!function(g,f){
-"object"==typeof exports&&"undefined"!=typeof module?module.exports=f():"function"==typeof define&&define.amd?define(f):g.edcss=f()
-}(this,function(){
+(function() {
 'use strict';
 
 //alert
@@ -12,28 +10,119 @@ e.target.parentNode.parentNode.removeChild(e.target.parentNode);
 });
 });
 
-//nav
-let navs=document.querySelector('.navbar-toggle');
-if(navs!=null){
-navs.addEventListener('click',function(e){
-e.preventDefault();
-let navbars=document.querySelectorAll('.navbar-nav');
-[].forEach.call(navbars,function(navbar){
-navbar.classList.toggle('nav-open');
+//toggler
+const tgl=document.querySelector('.navbar-toggler');
+const navbarNavs=document.querySelectorAll('.navbar-nav');
+if (tgl != null && navbarNavs.length > 0) {
+tgl.addEventListener('click', function(e) {
+e.stopPropagation();
+const isExpanded=tgl.getAttribute('aria-expanded') === 'true';
+tgl.setAttribute('aria-expanded', !isExpanded);
+[].forEach.call(navbarNavs, function(navbar) {
+navbar.classList.toggle('show');
+if (navbar.classList.contains('show')) {
+navbar.style.display='flex';
+navbar.style.flexDirection='column';
+} else {
+navbar.style.display='none';
+}
+navbar.querySelectorAll('.dropdown-menu.show').forEach(openMenu => {
+openMenu.classList.remove('show');
+});
 });
 });
 }
-//dropdown
-let nav_dds=document.querySelectorAll('.dropdown-toggle');
-[].forEach.call(nav_dds,function(nav_dd){
-nav_dd.addEventListener('click',function(e){
+
+//nav show/hide
+document.addEventListener('click',function(e){
+const clickedEl=e.target;
+const clickedToggle=clickedEl.closest('.dropdown-toggle');
+if(clickedToggle){
 e.preventDefault();
-let nextEl=this.nextElementSibling;
-//mobile
-nextEl.classList.toggle('dropdown-open');
-//desktop: @media(min-width:768px){.dropdown:hover>.dropdown-menu{display:block}}
+const parentDropdown=clickedToggle.closest('.dropdown');
+const dropdownMenu=parentDropdown.querySelector('.dropdown-menu');
+if(dropdownMenu){
+const isCurrentlyOpen=dropdownMenu.classList.contains('show');
+document.querySelectorAll('.dropdown-menu.show').forEach(openMenu=>{
+if(openMenu !== dropdownMenu && !openMenu.closest('.dropdown').contains(clickedToggle)){
+openMenu.classList.remove('show');
+}
 });
+if(!isCurrentlyOpen){
+dropdownMenu.classList.add('show');
+}else{
+dropdownMenu.classList.remove('show');
+}
+}
+}else{
+document.querySelectorAll('.dropdown-menu.show').forEach(openMenu=>{
+const openMenuParentDropdown=openMenu.closest('.dropdown');
+if(openMenuParentDropdown && !openMenuParentDropdown.contains(clickedEl)){
+openMenu.classList.remove('show');
+}
 });
+}
+if(tgl && window.getComputedStyle(tgl).display !== 'none'){
+const isClickInsideNavbar=clickedEl.closest('.navbar');
+const isNavbarNavOpen=[].some.call(navbarNavs,nav=>nav.classList.contains('show'));
+if(isNavbarNavOpen && !isClickInsideNavbar){
+tgl.setAttribute('aria-expanded',false);
+[].forEach.call(navbarNavs, function(navbar){
+navbar.classList.remove('show');
+navbar.style.display='none';
+});
+}
+}
+});
+
+function navOverflow() {
+    const navbar=document.querySelector('.navbar');
+    if(!navbar) return;
+    const container=navbar.querySelector('.container');
+    const brand=navbar.querySelector('.navbar-brand');
+    const toggler=navbar.querySelector('.navbar-toggler');
+    const navs=navbar.querySelectorAll('.navbar-nav');
+    if(!container || !brand || !toggler || navs.length === 0) return;
+    const originalNavStyles=[];
+    navs.forEach(nav=>{
+    originalNavStyles.push({display:nav.style.display,flexDirection:nav.style.flexDirection,width:nav.style.width,whiteSpace:nav.style.whiteSpace,overflowX:nav.style.overflowX});
+    });
+    toggler.style.display='none';
+    navs.forEach(nav=>nav.style.cssText="display:flex;flex-direction:row;width:auto;white-space:nowrap;overflow-x:visible");
+    let requiredContentWidth=0;
+    [].forEach.call(container.children,child=>{
+        if(child === brand || Array.from(navs).includes(child)){
+            const style=window.getComputedStyle(child);
+            const marginLeft=parseFloat(style.marginLeft) || 0;
+            const marginRight=parseFloat(style.marginRight) || 0;
+            requiredContentWidth += child.offsetWidth + marginLeft + marginRight;
+        }
+    });
+    const availableContainerWidth=container.clientWidth;
+    if(requiredContentWidth > availableContainerWidth){
+        toggler.style.display='block';
+        navs.forEach(nav=>{
+			nav.style.cssText="flex-direction:column;width:100%;white-space:normal";
+            if(!nav.classList.contains('show')){
+                nav.style.display='none';
+            }else{
+                nav.style.display='flex';
+            }
+        });
+    }else{
+        toggler.style.display='none';
+        navs.forEach(nav=>{
+            nav.classList.remove('show');
+            nav.style.cssText="display:flex;flex-direction:row;width:auto;white-space:normal";
+        });
+    }
+    navs.forEach((nav,index)=>{
+        nav.style.overflowX=originalNavStyles[index].overflowX;
+    });
+}
+window.addEventListener('load', navOverflow);
+window.addEventListener('resize', navOverflow);
+
 
 //tab
 let tabs=document.querySelectorAll('.nav-tabs li');
@@ -127,7 +216,7 @@ prevImg.style.display="none";
 nextImg.style.display="none";
 }
 }
-let curr_img,selector,count=0,setIDs=true,setClick='a.thumbnail',target;
+let curr_img,selector,count=0,setIDs=true,setClick='a.img-thumbnail',target;
 if(prevImg!=null){
 prevImg.addEventListener('click',function(){
 curr_img--;
@@ -189,40 +278,88 @@ updateGallery(document.querySelector('[data-id="'+id+'"]'));
 });
 });
 
-var isObj=function(str){
-return str instanceof Object ? true : false;
+function isObj(val) {
+return val !== null && typeof val === 'object' && !Array.isArray(val);
+}
+function isJson(str){
+if(typeof str !== 'string'){
+return false;
+}
+try{
+const parsed=JSON.parse(str);
+if(parsed === null || typeof parsed === 'undefined'){
+return false;
+}
+if(typeof parsed !== 'object' && !Array.isArray(parsed)){
+return false;
+}
+return true;
+}catch(e){
+return false;
+}
 }
 
 //ajax
-return {
-ajax:function(opt){
+window.ajax=function(opt){
 opt.type=(opt.type || 'GET').toUpperCase();
-opt.async=opt.async != null ? opt.async : true;
-let xhr=window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-xhr.onreadystatechange=function(){
-if(xhr.readyState==4){
-let status = xhr.status;
-if(status >= 200 && status < 300){
-opt.success && opt.success(xhr.responseText,xhr.responseXML);
+opt.async=opt.async !== undefined ? opt.async : true;
+opt.data=opt.data || null;
+let xhr;
+if(window.XMLHttpRequest){
+xhr=new XMLHttpRequest();
 }else{
-opt.fail && opt.fail(status);
+if(opt.fail) opt.fail("Browser does not support XMLHttpRequest.");
+return;
+}
+xhr.onreadystatechange=function(){
+if(xhr.readyState===4){
+const status=xhr.status;
+if(status >= 200 && status < 300){
+if(opt.success){
+opt.success(xhr.responseText,xhr.responseXML);
+}
+}else{
+if(opt.fail){
+opt.fail(status);
 }
 }
 }
-if(isObj(opt.data)){
+};
+xhr.onerror=function(){
+if(opt.fail){
+opt.fail('Network Error or CORS issue');
+}
+};
+let requestData=null;
+let contentType="application/x-www-form-urlencoded";
+if(isObj(opt.data) && !isJson(opt.data)){
+if(opt.json && opt.type === "POST"){
+requestData=JSON.stringify(opt.data);
+contentType="application/json";
+}else{
 let arr=[];
-for(let name in opt.data) arr.push(encodeURIComponent(name)+"="+encodeURIComponent(opt.data[name]));
-opt.data=arr.join("&");
+for(let name in opt.data){
+if(Object.prototype.hasOwnProperty.call(opt.data, name)){
+arr.push(encodeURIComponent(name) + "=" + encodeURIComponent(opt.data[name]));
 }
-if(opt.type=="GET"){
-xhr.open("GET",opt.url+"?"+opt.data,opt.async);
+}
+requestData=arr.join("&");
+}
+}else if(isJson(opt.data)){
+requestData=JSON.stringify(opt.data);
+contentType="application/json";
+}else if(typeof opt.data==='string'){
+requestData=opt.data;
+}
+if(opt.type==="GET"){
+const url=opt.url+(requestData ? "?"+requestData : "");
+xhr.open("GET",url,opt.async);
 xhr.send(null);
-}else if (opt.type == "POST"){
+}else if(opt.type==="POST"){
 xhr.open("POST",opt.url,opt.async);
-xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-xhr.send(opt.data);
+xhr.setRequestHeader("Content-Type",contentType);
+xhr.send(requestData);
 }
-}
-}
+};
 
-});
+})();
